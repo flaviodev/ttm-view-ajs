@@ -6,7 +6,7 @@ angular.module('app').directive('ttmCrudTitle', ttmCrudTitle);
 function ttmCrudTitle() {
 	return{
 		restrict: 'E',
-		templateUrl: "app/modules/register/templates/ttmCrudTitle.template.html",
+		templateUrl: "vendor/flaviodev/ttm-view-ajs/app/modules/register/templates/ttmCrudTitle.template.html",
 		replace: true
 	};
 }
@@ -19,7 +19,7 @@ angular.module('app').directive('ttmCrudMessages', ttmCrudMessages);
 function ttmCrudMessages() {
 	return{
 		restrict: 'E',
-		templateUrl: "app/modules/register/templates/ttmCrudMessages.template.html",
+		templateUrl: "vendor/flaviodev/ttm-view-ajs/app/modules/register/templates/ttmCrudMessages.template.html",
 		transclude: true,
 		replace: true			
 	};
@@ -44,7 +44,7 @@ angular.module('app').directive('ttmCrudFormEditionButtons', ttmCrudFormEditionB
 function ttmCrudFormEditionButtons() {
 	return{
 		restrict: 'E',
-		templateUrl: "app/modules/register/templates/ttmCrudFormEditionButtons.template.html",
+		templateUrl: "vendor/flaviodev/ttm-view-ajs/app/modules/register/templates/ttmCrudFormEditionButtons.template.html",
 		replace: true
 	};
 }
@@ -57,7 +57,7 @@ angular.module('app').directive('ttmCrudFormNewButton', ttmCrudFormNewButton);
 function ttmCrudFormNewButton() {
 	return{
 		restrict: 'E',
-		templateUrl: "app/modules/register/templates/ttmCrudFormNewButton.template.html",
+		templateUrl: "vendor/flaviodev/ttm-view-ajs/app/modules/register/templates/ttmCrudFormNewButton.template.html",
 		replace: true,
 		transclude: true
 	};
@@ -71,7 +71,7 @@ angular.module('app').directive('ttmCrudTableLoadButton', ttmCrudTableLoadButton
 function ttmCrudTableLoadButton() {
 	return{
 		restrict: 'E',
-		templateUrl: "app/modules/register/templates/ttmCrudTableLoadButton.template.html",
+		templateUrl: "vendor/flaviodev/ttm-view-ajs/app/modules/register/templates/ttmCrudTableLoadButton.template.html",
 		replace: true,
 		transclude: true
 	};
@@ -85,7 +85,7 @@ angular.module('app').directive('ttmCrudTableDeleteButton', ttmCrudTableDeleteBu
 function ttmCrudTableDeleteButton() {
 	return{
 		restrict: 'E',
-		templateUrl: "app/modules/register/templates/ttmCrudTableDeleteButton.template.html",
+		templateUrl: "vendor/flaviodev/ttm-view-ajs/app/modules/register/templates/ttmCrudTableDeleteButton.template.html",
 		replace: true,
 		transclude: true
 	};
