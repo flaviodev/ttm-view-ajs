@@ -1,0 +1,25 @@
+{
+	"name" : "flaviodev/ttm-view-ajs",
+	"type" : "api",
+	"description" : "",
+	"version" : "dev-master",
+	"license" : "MIT",
+	"minimum-stability" : "dev",
+	"keywords" : ["core","api","dao","php","doctrine","orm","ttm"],
+	"homepage" : "https://github.com/flaviodev/ttm-view-ajs",
+	"authors" : [{
+			"name" : "Flávio de Souza",
+			"email" : "fdsdev@gmail.com"
+		}
+	],
+	"require" : {
+		"twitter/bootstrap" : "v3.1.1"
+	},
+	"require-dev": {
+	}
+}
+
+
+
+
+
