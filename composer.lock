@@ -4,9 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c22be96b06be4ba1c32c9d5c5705221e",
-    "content-hash": "6400b41b6ec4e323e15ae6e17c8c64d7",
-    "packages": [
+    "hash": "aab2dd3d06da81925ff37899077ef441",
+    "content-hash": "920cf8623931aecb3e2b80ccdb1ebd9d",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "twitter/bootstrap",
             "version": "v3.1.1",
@@ -50,7 +51,6 @@
             "time": "2014-02-13 17:24:59"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": [],
