@@ -6,39 +6,12 @@
 (function() {
 	'use strict';
     
-	angular.module('app').controller('registerController', registerController);
-	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "registerService"];
+	app.controller('registerController', registerController);
+	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "registerService","gettextCatalog"];
 
-	function registerController ($scope, $window, $filter, NgTableParams, registerService) {
+	function registerController ($scope, $window, $filter, NgTableParams, registerService, gettextCatalog) {
 		/* jshint validthis: true */
 		var self = this;
-
-		/** CRUD entity for comunication with control layer (assembly url) */
-		self.ttmEntity = $("#ttm-crud-config").attr("resource"); 
-		
-		/** CRUD entity name for showing on screen */
-		self.ttmEntityName = $("#ttm-crud-config").attr("name-resource");
-		
-		var sortByColumn;
-		var sortByValue;
-		
-		var filterByColumn;
-		var filterByValue;
-		
-		self.ttmSortBy = $("#registers-table").attr("ttm-sort-by"); 
-		self.ttmFilterBy = $("#registers-table").attr("ttm-filter-by");
-		
-		if(self.ttmSortBy != undefined && self.ttmSortBy.indexOf(":")>-1) {
-			var partsOfSortBy = self.ttmSortBy.split(":");
-			sortByColumn = partsOfSortBy[0];
-			sortByValue = partsOfSortBy[1];
-		}
-		
-		if(self.ttmFilterBy != undefined && self.ttmFilterBy.indexOf(":")>-1) {
-			var partsOfFilterBy = self.self.ttmFilterBy.split(":");
-			filterByColumn = partsOfFilterBy[0];
-			filterByValue = partsOfFilterBy[1];
-		}
 
 		/** setting initial state of mode view on form */ 
 		self.view_state=true;
@@ -49,40 +22,64 @@
 		/** register array for storing the table data on screen */
 		var objects = [];
 		
+		self.setServicePath = setServicePath;
+		function setServicePath(servicePath) {
+			registerService.setServicePath(servicePath);
+		}		
 		
-		/** Crude operations (invoke crud services) */
+		self.setResource = setResource;
+		function setResource(resource) {
+			registerService.setResource(resource);
+		}		
+
+		self.resourceName;
+		self.setResourceName = setResourceName;
+		function setResourceName(resourceName) {
+			self.resourceName = resourceName;
+		}		
 		
-		registerService.setServicePath(controlLayerService);
-		registerService.setResource(self.ttmEntity);
+
+		var sorting = {};
+		self.setSortBy = setSortBy;
+		function setSortBy(sortBy) {
+			if(sortBy != undefined && sortBy.indexOf(":")>-1) {
+				var partsOfSortBy = sortBy.split(":");
+				sorting[partsOfSortBy[0]] = partsOfSortBy[1];
+			}
+		}		
+
+		var filter = {};
+		self.setFilterBy = setFilterBy;
+		function setFilterBy(filterBy) {
+			if(filterBy != undefined && filterBy.indexOf(":")>-1) {
+				var partsOfFilterBy = self.self.filterBy.split(":");
+				filter[partsOfFilterBy[0]] = partsOfFilterBy[1];
+			}
+		}				
 		
 		/** 
 	    * getObjects - function responsible to return the registers of crud table 
 	    */
-		registerService.getAllObjects(
-		    /** onSuccessFunction */
-			function (status, data) {
-				if(status == 200) {
-					/** ttmCrudTable: collection that contais the registers of table, data: return of service */ 
-					objects = data;
-				} 
-				  
-				var sorting = {};
-				if(sortByColumn != undefined) {
-					sorting[sortByColumn] = sortByValue;
-				}
-				
-				var filter = {};
-				if(filterByColumn != undefined) {
-					filter[filterByColumn] = filterByValue;
-				}
-				
-				self.tableParams = tablePaging($scope, $filter, NgTableParams, objects, 5, sorting, filter);
-		    },
-		    /** onErrorFunction */
-		    function (status, data) {
-		    	alert('Error trying get '+self.ttmEntityName+' registers: ' + data);
-		    }
-		);
+		
+		self.getAllObjects = getAllObjects;
+		function getAllObjects() {
+			registerService.getAllObjects(
+			    /** onSuccessFunction */
+				function (status, data) {
+					
+					if(status == 200) {
+						/** ttmCrudTable: collection that contais the registers of table, data: return of service */ 
+						objects = data;
+					} 
+					
+					self.tableParams = ngTablePaging($filter, NgTableParams, objects, 5, sorting, filter);
+			    },
+			    /** onErrorFunction */
+			    function (status, data) {
+			    	alert(gettextCatalog.getString('Error trying {{operation}} {{resourceName}}: {{data}}', { resourceName: gettextCatalog.getString(self.resourceName), data:data, operation : gettextCatalog.getString("to get") }));
+			    }
+			);
+		}
 		
 		/**
 		 * getObject - invoke the service that return a object (mapped entity) corresponding on id
@@ -96,7 +93,7 @@
 				},
 			    /** onErrorFunction */
 			    function (status, data) {
-					alert('Error trying get '+self.ttmEntityName+' registers: ' + data);
+			    	alert(gettextCatalog.getString('Error trying {{operation}} {{resourceName}}: {{data}}', { resourceName: gettextCatalog.getString(self.resourceName), data:data, operation : gettextCatalog.getString("to get") }));
 				}
 			);					
 		}
@@ -122,11 +119,11 @@
 					self.creating_mode = false;
 					self.edition_state = false;
 					
-					showMessage("message-status","success",self.ttmEntityName+' saved with success');	
+					showMessage("message-status","success",gettextCatalog.getString('{{resourceName}} {{operation}} with success', {resourceName:gettextCatalog.getString(self.resourceName), operation:gettextCatalog.getString("saved")}));	
 				},
 			    /** onErrorFunction */
 			    function (status, data) {
-					alert('Error trying save '+self.ttmEntityName+': '+data);
+			    	alert(gettextCatalog.getString('Error trying {{operation}} {{resourceName}}: {{data}}', { resourceName: gettextCatalog.getString(self.resourceName), data:data, operation : gettextCatalog.getString("to save") }));
 				}
 			);					
 		}
@@ -156,12 +153,13 @@
 					self.view_state = true;
 					self.updating_mode = false;
 					self.edition_state = false;
-	
-					showMessage("message-status","success",self.ttmEntityName+' updated with success');
+
+					
+					showMessage("message-status","success",gettextCatalog.getString('{{resourceName}} {{operation}} with success', {resourceName:gettextCatalog.getString(self.resourceName), operation:gettextCatalog.getString("updated")}));
 				},
 			    /** onErrorFunction */
 			    function (status, data) {
-					alert('Error trying update '+self.ttmEntityName+': '+data);
+			    	alert(gettextCatalog.getString('Error trying {{operation}} {{resourceName}}: {{data}}', { resourceName: gettextCatalog.getString(self.resourceName), data:data, operation : gettextCatalog.getString("to update") }));
 				}
 			);					
 		}
@@ -174,7 +172,7 @@
 
 			/** Validation if the delete request isnt about a object on edition */
 			if($scope.register!=null && $scope.register.id==object.id) {
-				alert("Register is on edition! Can't be deleted.")
+				alert(gettextCatalog.getString("Register is on edition! Can't be deleted."))
 				return;
 			}
 			
@@ -191,12 +189,12 @@
 							self.tableParams.reload();
 						}
 					});
-						
-					showMessage("message-status","success",self.ttmEntityName+' deleted with success');
+
+					showMessage("message-status","success",gettextCatalog.getString('{{resourceName}} {{operation}} with success', {resourceName:gettextCatalog.getString(self.resourceName), operation:gettextCatalog.getString("deleted")}));
 				},
 			    /** onErrorFunction */
 			    function (status, data) {
-					alert('Error trying delete '+self.ttmEntityName+': '+data);
+			    	alert(gettextCatalog.getString('Error trying {{operation}} {{resourceName}}: {{data}}', { resourceName: gettextCatalog.getString(self.resourceName), data:data, operation : gettextCatalog.getString("to delete") }));
 				}
 			);					
 		}
@@ -257,7 +255,7 @@
 		*/   
 		self.showDeleteConfirm = showDeleteConfirm;
 		function showDeleteConfirm(object) {
-			if ($window.confirm("Would you like to delete this register?")) {
+			if ($window.confirm(gettextCatalog.getString('Would you like to delete this register?'))) {
 				self.deleteObject(object);
 			}
 		}   

@@ -51,3 +51,7 @@ ttm-crud-field-error {
 #button-delete {
 	float:right;font-size:10px
 }
+
+md-icon svg {
+  fill: inherit;
+}

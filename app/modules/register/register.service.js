@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('app').service('registerService', registerService);
+	app.service('registerService', registerService);
 	registerService.$inject = ["$http"];
 
 	function registerService ($http) {
