@@ -6,7 +6,7 @@
 (function() {
 	'use strict';
     
-	angular.module('app').controller('navigationController', navigationController);
+	app.controller('navigationController', navigationController);
 	navigationController.$inject = ["$rootScope", "$location"];
 
 	function navigationController ($rootScope, $location) {
@@ -14,7 +14,7 @@
 	}
 })();
 
-function tablePaging($scope, $filter, NgTableParams, dataArray, pageCount, sortBy, filterBy) {
+function ngTablePaging($filter, NgTableParams, dataArray, pageCount, sortBy, filterBy) {
 	var initialParams = { 
 		count: pageCount,
 		sorting: sortBy,

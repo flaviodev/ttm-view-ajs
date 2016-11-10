@@ -2,7 +2,7 @@
 * @doc
 * @example <ttm-crud-title></ttm-crud-title>
 */
-angular.module('app').directive('ttmCrudTitle', ttmCrudTitle);
+app.directive('ttmCrudTitle', ttmCrudTitle);
 function ttmCrudTitle() {
 	return{
 		restrict: 'E',
