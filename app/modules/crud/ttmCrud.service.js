@@ -1,10 +1,10 @@
 (function() {
 	'use strict';
 
-	app.service('$registerHttpService', registerHttpService);
-	registerHttpService.$inject = ["$http"];
+	app.service('$ttmCrud', $ttmCrud);
+	$ttmCrud.$inject = ["$http"];
 
-	function registerHttpService ($http) {
+	function $ttmCrud ($http) {
 		/* jshint validthis: true */
 		var self = this;
 

@@ -6,10 +6,10 @@
 (function() {
 	'use strict';
     
-	app.controller('registerController', registerController);
-	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "$registerService","gettextCatalog"];
+	app.controller('ttmCrudController', ttmCrudController);
+	ttmCrudController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "$ttmCrud","gettextCatalog"];
 
-	function registerController ($scope, $window, $filter, NgTableParams, $registerService, gettextCatalog) {
+	function ttmCrudController ($scope, $window, $filter, NgTableParams, $ttmCrud, gettextCatalog) {
 		/* jshint validthis: true */
 		var self = this;
 
@@ -24,12 +24,12 @@
 		
 		self.setServicePath = setServicePath;
 		function setServicePath(servicePath) {
-			$registerService.setServicePath(servicePath);
+			$ttmCrud.setServicePath(servicePath);
 		}		
 		
 		self.setResource = setResource;
 		function setResource(resource) {
-			$registerService.setResource(resource);
+			$ttmCrud.setResource(resource);
 		}		
 
 		self.resourceName;
@@ -61,7 +61,7 @@
 	    */
 		self.getAllObjects = getAllObjects;
 		function getAllObjects() {
-			$registerService.getAllObjects(
+			$ttmCrud.getAllObjects(
 			    /** onSuccessFunction */
 				function (status, data) {
 					if(status == 200) {
@@ -83,7 +83,7 @@
 		 */
 		self.getObject = getObject;
 		function getObject(id) {
-			$registerService.getObject(id,
+			$ttmCrud.getObject(id,
 			    /** onSuccessFunction */
 				function (status, data) {
 					$scope.register = data;
@@ -100,7 +100,7 @@
 		*/
 		self.createObject = createObject;
 		function createObject(object) {
-			$registerService.postObject(object,
+			$ttmCrud.postObject(object,
 			    /** onSuccessFunction */
 				function (status, data) {
 					/** pushing the created register to crud table */
@@ -130,7 +130,7 @@
 		*/
 		self.updateObject = updateObject;
 		function updateObject(object) {
-			$registerService.putObject(object,
+			$ttmCrud.putObject(object,
 			    /** onSuccessFunction */
 				function (status, data) {
 					/** updating the data on crud table */ 
@@ -172,7 +172,7 @@
 				return;
 			}
 			
-			$registerService.deleteObject(object.id,
+			$ttmCrud.deleteObject(object.id,
 			    /** onSuccessFunction */
 				function (status, data) {
 					/** removing the data on crud table */
