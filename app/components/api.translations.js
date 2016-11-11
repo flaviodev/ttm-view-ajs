@@ -2,7 +2,7 @@ angular.module("gettext").run(['gettextCatalog', function (gettextCatalog) {
 		
 	// Load the strings automatically during initialization.
 	gettextCatalog.setStrings("pt", {
-//        "One boat": ["Uno barco", "{{$count}} barcos"]
+		//crud translations
         "New" : {"female":"Nova","male":"Novo",'$$noContext':"Novo" },
         "Creating a new" : "Novo cadastro de",
         
@@ -34,7 +34,8 @@ angular.module("gettext").run(['gettextCatalog', function (gettextCatalog) {
     });
 	
 	gettextCatalog.setStrings("es", {
-        "New" : {"female":"Nueva","male":"Nuevo",'$$noContext':"Nuevo" },
+		//crud translations
+		"New" : {"female":"Nueva","male":"Nuevo",'$$noContext':"Nuevo" },
         "Creating a new" : "Nuevo registro de",
         
         "Save" :"Guardar",
