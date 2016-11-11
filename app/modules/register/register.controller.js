@@ -7,13 +7,9 @@
 	'use strict';
     
 	app.controller('registerController', registerController);
-<<<<<<< HEAD
-	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "registerService","gettextCatalog"];
-=======
-	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "registerService"];
->>>>>>> branch 'master' of https://github.com/flaviodev/ttm-view-ajs.git
+	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "$registerService","gettextCatalog"];
 
-	function registerController ($scope, $window, $filter, NgTableParams, registerService, gettextCatalog) {
+	function registerController ($scope, $window, $filter, NgTableParams, $registerService, gettextCatalog) {
 		/* jshint validthis: true */
 		var self = this;
 
@@ -28,12 +24,12 @@
 		
 		self.setServicePath = setServicePath;
 		function setServicePath(servicePath) {
-			registerService.setServicePath(servicePath);
+			$registerService.setServicePath(servicePath);
 		}		
 		
 		self.setResource = setResource;
 		function setResource(resource) {
-			registerService.setResource(resource);
+			$registerService.setResource(resource);
 		}		
 
 		self.resourceName;
@@ -41,7 +37,6 @@
 		function setResourceName(resourceName) {
 			self.resourceName = resourceName;
 		}		
-		
 
 		var sorting = {};
 		self.setSortBy = setSortBy;
@@ -64,13 +59,11 @@
 		/** 
 	    * getObjects - function responsible to return the registers of crud table 
 	    */
-		
 		self.getAllObjects = getAllObjects;
 		function getAllObjects() {
-			registerService.getAllObjects(
+			$registerService.getAllObjects(
 			    /** onSuccessFunction */
 				function (status, data) {
-					
 					if(status == 200) {
 						/** ttmCrudTable: collection that contais the registers of table, data: return of service */ 
 						objects = data;
@@ -90,7 +83,7 @@
 		 */
 		self.getObject = getObject;
 		function getObject(id) {
-			registerService.getObject(id,
+			$registerService.getObject(id,
 			    /** onSuccessFunction */
 				function (status, data) {
 					$scope.register = data;
@@ -107,7 +100,7 @@
 		*/
 		self.createObject = createObject;
 		function createObject(object) {
-			registerService.postObject(object,
+			$registerService.postObject(object,
 			    /** onSuccessFunction */
 				function (status, data) {
 					/** pushing the created register to crud table */
@@ -137,7 +130,7 @@
 		*/
 		self.updateObject = updateObject;
 		function updateObject(object) {
-			registerService.putObject(object,
+			$registerService.putObject(object,
 			    /** onSuccessFunction */
 				function (status, data) {
 					/** updating the data on crud table */ 
@@ -179,7 +172,7 @@
 				return;
 			}
 			
-			registerService.deleteObject(object.id,
+			$registerService.deleteObject(object.id,
 			    /** onSuccessFunction */
 				function (status, data) {
 					/** removing the data on crud table */
@@ -278,7 +271,6 @@
 		/** copy data of form to table, converting the type of data **/
 		function parseObjectToTable(object) {
 			var copyObject = {};
-			
 			for(var i in object) {
 				copyObject[i] = parseFieldToTable(object[i]);
 			}
@@ -291,7 +283,6 @@
 			if(field instanceof Date) {
 				// parsing date to table
 				var dateField = {};
-				
 				dateField.date = field.getTime();
 		
 				return dateField;
