@@ -11,5 +11,5 @@ app.run(function (gettextCatalog,tmhDynamicLocale) {
 });
 
 app.config(function(tmhDynamicLocaleProvider) {
-  tmhDynamicLocaleProvider.localeLocationPattern('vendor/flaviodev/ttm-view-ajs/app/locales/angular-locale_{{locale}}.js');
+	tmhDynamicLocaleProvider.localeLocationPattern('vendor/flaviodev/ttm-view-ajs/app/locales/angular-locale_{{locale}}.js');
 });
