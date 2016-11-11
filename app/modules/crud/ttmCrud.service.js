@@ -1,10 +1,17 @@
 (function() {
 	'use strict';
 
+<<<<<<< HEAD
 	app.service('$ttmCrud', $ttmCrud);
 	$ttmCrud.$inject = ["$http"];
 
 	function $ttmCrud ($http) {
+=======
+	app.service('$registerHttpService', registerHttpService);
+	registerHttpService.$inject = ["$http"];
+
+	function registerHttpService ($http) {
+>>>>>>> branch 'master' of https://github.com/flaviodev/ttm-view-ajs.git
 		/* jshint validthis: true */
 		var self = this;
 
