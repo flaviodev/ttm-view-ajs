@@ -7,7 +7,11 @@
 	'use strict';
     
 	app.controller('registerController', registerController);
+<<<<<<< HEAD
 	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "registerService","gettextCatalog"];
+=======
+	registerController.$inject = ["$scope", "$window", "$filter", "NgTableParams", "registerService"];
+>>>>>>> branch 'master' of https://github.com/flaviodev/ttm-view-ajs.git
 
 	function registerController ($scope, $window, $filter, NgTableParams, registerService, gettextCatalog) {
 		/* jshint validthis: true */
@@ -153,7 +157,6 @@
 					self.view_state = true;
 					self.updating_mode = false;
 					self.edition_state = false;
-
 					
 					showMessage("message-status","success",gettextCatalog.getString('{{resourceName}} {{operation}} with success', {resourceName:gettextCatalog.getString(self.resourceName), operation:gettextCatalog.getString("updated")}));
 				},
