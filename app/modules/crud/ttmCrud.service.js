@@ -19,6 +19,12 @@
 		function setResource(resource) {
 			self.resource = resource;
 		}		
+
+		self.resourceLocaleStrings;
+		self.setResourceLocaleStrings = setResourceLocaleStrings;
+		function setResourceLocaleStrings(resourceLocaleStrings) {
+			self.resourceLocaleStrings = resourceLocaleStrings;;
+		}		
 		
 		self.header = {'Content-Type': 'application/json; charset=UTF-8'};
 		
@@ -62,8 +68,13 @@
 		}
 		
 		self.postObject = postObject;
-		function postObject(object, onSuccessFunction, onErrorFunction) {
-			doRequest("POST", getUri(), object, onSuccessFunction, onErrorFunction);
+		function postObject(object, locale, onSuccessFunction, onErrorFunction) {
+			var uri = getUri();
+			if (locale != undefined) {
+				uri+="/"+locale;
+			}
+
+			doRequest("POST", uri, object, onSuccessFunction, onErrorFunction);
 		}
 		
 		self.putObject = putObject;
