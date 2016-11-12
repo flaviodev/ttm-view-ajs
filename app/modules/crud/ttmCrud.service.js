@@ -44,13 +44,21 @@
 		}
 
 		self.getAllObjects = getAllObjects;
-		function getAllObjects(onSuccessFunction, onErrorFunction) {
-			doRequest("GET", getUri(), null, onSuccessFunction, onErrorFunction); 
+		function getAllObjects(locale,onSuccessFunction, onErrorFunction) {
+			var uri = getUri();
+			if (locale != undefined) {
+				uri+="/"+locale;
+			}
+			doRequest("GET", uri, null, onSuccessFunction, onErrorFunction); 
 		}
 		
 		self.getObject = getObject;
 		function getObject(id, onSuccessFunction, onErrorFunction) {
-			doRequest("GET", getUri()+"/"+id, null, onSuccessFunction, onErrorFunction); 
+			var uri = getUri()+"/"+id;
+			if (locale != undefined) {
+				uri+="/"+locale;
+			}
+			doRequest("GET", uri, null, onSuccessFunction, onErrorFunction); 
 		}
 		
 		self.postObject = postObject;

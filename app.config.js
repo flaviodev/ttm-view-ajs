@@ -1,8 +1,13 @@
 var app = angular.module('app', ['ngRoute','ngTable','ngMaterial','gettext','tmh.dynamicLocale']);
 
 var $=jQuery;
-var controlLayerService = '';
+var controlLayerService = '/curriculum-control-php';
 
+var availableLanguages = {
+    'en-us': 'English',
+    'pt-br': 'Português (Brasil)',
+    'es-es': 'Español'	
+}
 
 app.run(function (gettextCatalog,tmhDynamicLocale) {
 	tmhDynamicLocale.set('en-us');

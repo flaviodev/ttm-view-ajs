@@ -60,8 +60,8 @@
 	    * getObjects - function responsible to return the registers of crud table 
 	    */
 		self.getAllObjects = getAllObjects;
-		function getAllObjects() {
-			$ttmCrud.getAllObjects(
+		function getAllObjects(locale) {
+			$ttmCrud.getAllObjects(locale,
 			    /** onSuccessFunction */
 				function (status, data) {
 					if(status == 200) {
@@ -82,8 +82,8 @@
 		 * getObject - invoke the service that return a object (mapped entity) corresponding on id
 		 */
 		self.getObject = getObject;
-		function getObject(id) {
-			$ttmCrud.getObject(id,
+		function getObject(id,locale) {
+			$ttmCrud.getObject(id,locale,
 			    /** onSuccessFunction */
 				function (status, data) {
 					$scope.register = data;
